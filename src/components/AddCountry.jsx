@@ -3,6 +3,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {baseUrl} from '../config'
 
 
 
@@ -25,7 +26,7 @@ export default function AddCountry() {
     async function handleSubmit(e) {
         e.preventDefault()
             const token = localStorage.getItem('token')
-            const response = await axios.post('api/countries/', formData, {
+            const response = await axios.post(`${baseUrl}/api/countries/`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             console.log(response.data);

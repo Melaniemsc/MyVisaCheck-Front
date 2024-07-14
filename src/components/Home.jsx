@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { isAdmin } from '../lib/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {baseUrl} from '../config'
 
 const Countries = () => {
 
@@ -12,7 +13,7 @@ const Countries = () => {
   const [order, setOrder] = useState('asc')
 
   async function fetchCountries() {
-    const resp = await fetch('/api/countries/')
+    const resp = await fetch(`${baseUrl}/api/countries/`)
     const data = await resp.json()
     setcountries(data)
   }

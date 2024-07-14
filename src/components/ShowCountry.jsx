@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'
 import { isAdmin } from '../lib/auth';
+import {baseUrl} from '../config'
 
 
 export default function ShowCountry() {
@@ -23,7 +24,7 @@ export default function ShowCountry() {
 
   async function fetchCountry() {
     try {
-      const resp = (await axios.get(`api/countries/${countryName}/`))
+      const resp = (await axios.get`${baseUrl}/api/countries/${countryName}/`)
       setCountry(resp.data)
     } catch (error) {
       toast.error(error.response.data.detail || error.response.data || 'An error occurred');
@@ -33,7 +34,7 @@ export default function ShowCountry() {
 
 
   async function fetchVisaRelation() {
-    const resp = await axios.get(`api/visa/?country_from=${countryName}`)
+    const resp = await axios.get(`${baseUrl}/api/visa/?country_from=${countryName}`)
     console.log(resp.data);
     setCountryVisas(resp.data)
   }
@@ -55,7 +56,7 @@ export default function ShowCountry() {
   async function handleSubmit(e) {
     e.preventDefault()
     const token = localStorage.getItem('token')
-    const response = await axios.put(`api/countries/${countryName}/`, country, {
+    const response = await axios.put(`${baseUrl}/api/countries/${countryName}/`, country, {
       headers: { Authorization: `Bearer ${token}` }
     })
     navigate(`/${country.name}`)

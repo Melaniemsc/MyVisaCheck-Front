@@ -3,6 +3,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {baseUrl} from '../config'
 
 export default function Signup() {
 
@@ -25,7 +26,7 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            await axios.post('/api/auth/register/', formData)
+            await axios.post(`${baseUrl}/api/auth/register/`, formData)
             toast.success('Signup was successful!', {
                 onClose: () => navigate('/login')
             });

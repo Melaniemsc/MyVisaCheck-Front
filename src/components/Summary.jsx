@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { getPayload } from "../lib/auth"
 import axios from "axios"
 import { Dropdown } from 'primereact/dropdown';
+import {baseUrl} from '../config'
 
 const Summary = () => {
 
@@ -14,13 +15,13 @@ const Summary = () => {
 
   async function fetchUser() {
     const token = localStorage.getItem('token')
-    const resp = await axios.get('/api/auth/summary/', { headers: { Authorization: `Bearer ${token}` } })
+    const resp = await axios.get(`${baseUrl}/api/auth/summary/`, { headers: { Authorization: `Bearer ${token}` } })
     setUser(resp.data)
     /* console.log(resp.data); */
   }
 
   async function fetchCountries() {
-    const resp = await axios.get('/api/countries/')
+    const resp = await axios.get(`${baseUrl}/api/countries/`)
 /*     console.log(resp.data);
  */    setCountries(resp.data)
     return countries
@@ -29,7 +30,7 @@ const Summary = () => {
   async function handleAddButton() {
     const token = localStorage.getItem('token')
     console.log(selectedCountry);
-    await axios.put('/api/auth/summary/', { nationality: selectedCountry.name }, {
+    await axios.put(`${baseUrl}/api/auth/summary/`, { nationality: selectedCountry.name }, {
       headers: { Authorization: `Bearer ${token}` }
     })
     setSelectedCountry("Select a Country")
@@ -37,7 +38,7 @@ const Summary = () => {
 
   async function handleDelete(nationality) {
     const token = localStorage.getItem('token')
-    await axios.delete('/api/auth/summary/', {
+    await axios.delete(`${baseUrl}/api/auth/summary/`, {
       headers: { Authorization: `Bearer ${token}` },
       data: { nationality: nationality.nationality }
     })
@@ -47,7 +48,7 @@ const Summary = () => {
   async function handleVisa() {
     const token = localStorage.getItem('token')
     user.nationality.map(async (nationality) => {
-      const resp = await axios.get(`api/visa/?country_from=${nationality.name}`, {
+      const resp = await axios.get(`${baseUrl}api/visa/?country_from=${nationality.name}`, {
         Authorization: `Bearer ${token}`
       })
       setCountryVisaRelations(resp.data)
