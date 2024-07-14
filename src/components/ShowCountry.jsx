@@ -24,7 +24,7 @@ export default function ShowCountry() {
 
   async function fetchCountry() {
     try {
-      const resp = (await axios.get`${baseUrl}/api/countries/${countryName}/`)
+      const resp = await axios.get(`${baseUrl}/api/countries/${countryName}/`)
       setCountry(resp.data)
     } catch (error) {
       toast.error(error.response.data.detail || error.response.data || 'An error occurred');
@@ -220,7 +220,7 @@ export default function ShowCountry() {
                       <h3> Visa type : {visa.type}</h3>
                     </div>
                   })}
-                  {country.notes != "nan" && <h3>Allowed Stay {country.allowed_stay}</h3>}
+                  {country.allowed_stay != "nan" && <h3>Allowed Stay {country.allowed_stay}</h3>}
                   {country.notes != "nan" && <h3>Extra notes: {country.notes}</h3>}
                 </div>
               </div>
