@@ -200,7 +200,7 @@ const Summary = () => {
               className="w-full"
             />
             <button onClick={handleAddButton}>➕</button>
-            <div className="box mt-3">
+            <div className={user.nationality.length>0? 'box mt-3':''}>
               {user.nationality.map((nationality, index) => (
                 <div key={index} className="mb-2">
                   <span>{nationality.name}</span>
