@@ -1,8 +1,41 @@
-/* body {
-    background-color: #FFF0D9;
-}
-
-.container {
+.p-dropdown {
+    /* Dropdown container */
+    border: 1px solid #363636; /* Dark theme border color */
+    border-radius: 8px; /* Increased border radius for a rounder look */
+    box-shadow: none;
+    padding: 0.5rem 0.75rem;
     
+  }
+  
+  .p-dropdown-focused {
+    /* Dropdown container when focused */
+    border-color: #209cee; /* Bulma's primary color */
+  }
+  
+  .p-dropdown-label, .p-dropdown-trigger {
+    /* Dropdown label and trigger */
+    color: #fff; /* White text color */
+  }
+  
+  .p-dropdown-panel {
+    /* Dropdown panel */
+    border: 1px solid #363636; /* Dark theme border color */
+    border-top: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adjusted shadow for softer appearance */
+    background-color: #242222; /* Dark theme background color */
+    border-radius: 8px; /* Increased border radius for a rounder look */
+  }
+  
+  .p-dropdown-item {
+    /* Dropdown items */
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #363636; /* Dark theme border color */
+  
+    &:hover {
+      background-color: #4a4a4a; /* Dark theme hover background color */
+    }
+  }
+  
+body{
+    background-color: #E9D2C0;
 }
- */

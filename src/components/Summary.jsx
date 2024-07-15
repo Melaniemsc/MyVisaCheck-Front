@@ -16,6 +16,7 @@ const Summary = () => {
   const [selectedVisaType, setSelectedVisaType] = useState('');
   const [countryOrder, setCountryOrder] = useState('');
 
+
   async function fetchUser() {
     const token = localStorage.getItem('token');
     const resp = await axios.get(`${baseUrl}/api/auth/summary/`, { headers: { Authorization: `Bearer ${token}` } });
@@ -111,16 +112,29 @@ const Summary = () => {
         <div>
           {filteredCountryVisaRelations.map((relation, index) => (
             <div className="box" key={index}>
-              <h3>{relation.country_from.name}</h3>
-              <h3>{relation.country_to.name}</h3>
-              {relation.visa_type.map((visa, index) => (
-                <div key={index}>
-                  <h3>Visa type: {visa.type}</h3>
+              <div className="columns is-vcentered">
+                <div className="column is-one-third .is-centered">
+                  <figure class="image">
+                    <img src={relation.country_from.flag} className="image is-96x96" />
+                  </figure>
+                  <p className="is-size-3 ">⬇️</p>
+                  <figure class="image">
+                    <img src={relation.country_to.flag} className="image is-96x96" />
+                  </figure>
+
                 </div>
-              ))}
-              {relation.allowed_stay !== "nan" && <h3>Allowed Stay: {relation.allowed_stay}</h3>}
-              {relation.notes !== "nan" && <h3>Extra notes: {relation.notes}</h3>}
-            </div>
+                <div className="column">
+                  <h3><strong>Country from:</strong> {relation.country_from.name}</h3>
+                  <h3><strong>Country to:</strong> {relation.country_to.name}</h3>
+                  {relation.visa_type.map((visa, index) => (
+                    <div key={index}>
+                      <h3><strong>Visa Type:</strong> {visa.type}</h3>
+                    </div>
+                  ))}
+                  {relation.allowed_stay !== "nan" && <h3><strong>Allowed Stay:</strong> {relation.allowed_stay}</h3>}
+                  {relation.notes !== "nan" && <h3><strong>Extra notes:</strong> {relation.notes}</h3>}
+                </div>
+              </div></div>
           ))}
         </div>
       </div>
@@ -128,65 +142,78 @@ const Summary = () => {
   }
 
   const filteredByVisaType = selectedVisaType
-    ? filteredCountryVisaRelations.filter(relation => 
-        relation.visa_type.some(visa => visa.type === selectedVisaType))
+    ? filteredCountryVisaRelations.filter(relation =>
+      relation.visa_type.some(visa => visa.type === selectedVisaType))
     : filteredCountryVisaRelations;
 
-    function orderByVisaType() {
-      return (
+  function orderByVisaType() {
+    return (
+      <div>
+        <Dropdown
+          value={selectedVisaType}
+          onChange={(e) => setSelectedVisaType(e.value)}
+          options={typesOfVisa.map(type => ({ label: type, value: type }))}
+          placeholder="Select type of visa"
+          filter
+          className="w-full md:w-14rem"
+        />
         <div>
-          <Dropdown
-            value={selectedVisaType}
-            onChange={(e) => setSelectedVisaType(e.value)}
-            options={typesOfVisa.map(type => ({ label: type, value: type }))}
-            placeholder="Select type of visa"
-            filter
-            className="w-full md:w-14rem"
-          />
-          <div>
-            {filteredByVisaType.map((relation, index) => (
-              <div className="box" key={index}>
-                <h3>{relation.country_from.name}</h3>
-                <h3>{relation.country_to.name}</h3>
-                {relation.visa_type.map((visa, index) => (
-                  <div key={index}>
-                    <h3>Visa type: {visa.type}</h3>
-                  </div>
-                ))}
-                {relation.allowed_stay !== "nan" && <h3>Allowed Stay: {relation.allowed_stay}</h3>}
-                {relation.notes !== "nan" && <h3>Extra notes: {relation.notes}</h3>}
-              </div>
-            ))}
-          </div>
+          {filteredByVisaType.map((relation, index) => (
+            <div className="box" key={index}>
+              <div className="columns is-vcentered ">
+                <div className="column is-one-third .is-centered">
+                  <figure class="image">
+                    <img src={relation.country_from.flag} className="image is-96x96" />
+                  </figure>
+                  <p className="is-size-3 ">⬇️</p>
+                  <figure class="image">
+                    <img src={relation.country_to.flag} className="image is-96x96" />
+                  </figure>
+
+                </div>
+                <div className="column">
+                  <h3><strong>Country from:</strong> {relation.country_from.name}</h3>
+                  <h3><strong>Country to:</strong> {relation.country_to.name}</h3>
+                  {relation.visa_type.map((visa, index) => (
+                    <div key={index}>
+                      <h3><strong>Visa Type:</strong> {visa.type}</h3>
+                    </div>
+                  ))}
+                  {relation.allowed_stay !== "nan" && <h3><strong>Allowed Stay:</strong> {relation.allowed_stay}</h3>}
+                  {relation.notes !== "nan" && <h3><strong>Extra notes:</strong> {relation.notes}</h3>}
+                </div>
+              </div></div>
+          ))}
         </div>
-      );
-    }
+      </div>
+    );
+  }
+
 
   return (
     <div className="hero is-fullheight-with-navbar">
       <div className="hero-body">
         <div className="container columns">
-          <div className="column">
-            <h1 className="subtitle mb-5">Hello {user.first_name}!</h1>
-            <div>
-              <div className="columns">
-                <div className="column">
-                  <h2>These are your nationalities</h2>
-                </div>
-                <div className="column">
-                  <Dropdown
-                    value={selectedAddCountry}
-                    onChange={(e) => setselectedAddCountry(e.value)}
-                    options={countries}
-                    optionLabel="name"
-                    placeholder="Select a Country"
-                    filter
-                    className="w-full md:w-14rem"
-                  />
-                  <button onClick={handleAddButton}>➕</button>
-                </div>
+          <div className="column is-4">
+
+            <div className="columns">
+              <div className="column">
+                <h2>These are your nationalities</h2>
+              </div>
+              <div className="column">
+                <Dropdown
+                  value={selectedAddCountry}
+                  onChange={(e) => setselectedAddCountry(e.value)}
+                  options={countries}
+                  optionLabel="name"
+                  placeholder="Select a Country"
+                  filter
+
+                />
+                <button onClick={handleAddButton}>➕</button>
               </div>
             </div>
+
             {user.nationality.map((nationality, index) => (
               <div key={index}>
                 {nationality.name}
