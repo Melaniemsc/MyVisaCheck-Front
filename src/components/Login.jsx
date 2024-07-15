@@ -35,39 +35,42 @@ export default function Login() {
     }
 
 
-    return <div className="section">
-        <div className="container">
-            <h1 className="title">Login</h1>
-            <form onSubmit={handleSubmit}>
+    return (
+        <div className="section">
+            <div className="container">
+                <h1 className="title dark-text">Login</h1>
+                <form onSubmit={handleSubmit}>
 
-                <div className="field">
-                    <label className="label">Email</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            name={'email'}
-                            onChange={handleChange}
-                            value={formData.email}
-                        />
+                    <div className="field">
+                        <label className="label dark-text">Email</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="text"
+                                name={'email'}
+                                onChange={handleChange}
+                                value={formData.email}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div className="field">
-                    <label className="label">Password</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="password"
-                            name={'password'}
-                            onChange={handleChange}
-                            value={formData.password}
-                        />
+                    <div className="field">
+                        <label className="label dark-text">Password</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="password"
+                                name={'password'}
+                                onChange={handleChange}
+                                value={formData.password}
+                            />
+                        </div>
                     </div>
-                </div>
-                <button className="button">Submit</button>
-                <ToastContainer />
-            </form>
+
+                    <button className="button">Submit</button>
+                    <ToastContainer />
+                </form>
+            </div>
         </div>
-    </div>
+    );
 }

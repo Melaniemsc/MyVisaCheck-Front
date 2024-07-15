@@ -77,7 +77,7 @@ const Countries = () => {
 
   return <div className="section">
     <div className="container">
-      <h1 className="title">
+      <h1 className="title dark-text">
         Countries
       </h1>
 

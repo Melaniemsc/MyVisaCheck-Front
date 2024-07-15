@@ -38,11 +38,11 @@ export default function Signup() {
     return <div className="section">
         <div className="container">
         <ToastContainer />
-            <h1 className="title">Sign Up</h1>
+            <h1 className="title dark-text">Sign Up</h1>
             <form onSubmit={handleSubmit}>
 
                 <div className="field">
-                    <label className="label">Username</label>
+                    <label className="label dark-text">Username</label>
                     <div className="control">
                         <input
                             className="input"
@@ -54,7 +54,7 @@ export default function Signup() {
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">First Name</label>
+                    <label className="label dark-text">First Name</label>
                     <div className="control">
                         <input
                             className="input"
@@ -66,7 +66,7 @@ export default function Signup() {
                     </div>
                 </div>
                 <div className="field">
-                    <label className="label">Last Name</label>
+                    <label className="label dark-text">Last Name</label>
                     <div className="control">
                         <input
                             className="input"
@@ -79,7 +79,7 @@ export default function Signup() {
                 </div>
 
                 <div className="field">
-                    <label className="label">Email</label>
+                    <label className="label dark-text">Email</label>
                     <div className="control">
                         <input
                             className="input"
@@ -92,7 +92,7 @@ export default function Signup() {
                 </div>
 
                 <div className="field">
-                    <label className="label">Password</label>
+                    <label className="label dark-text">Password</label>
                     <div className="control">
                         <input
                             className="input"
@@ -105,7 +105,7 @@ export default function Signup() {
                 </div>
 
                 <div className="field">
-                    <label className="label">Confirm password</label>
+                    <label className="label dark-text">Confirm password</label>
                     <div className="control">
                         <input
                             className="input"

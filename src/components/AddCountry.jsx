@@ -25,6 +25,7 @@ export default function AddCountry() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        try{
             const token = localStorage.getItem('token')
             const response = await axios.post(`${baseUrl}/api/countries/`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -34,58 +35,65 @@ export default function AddCountry() {
             toast.success('Country created successfully!', {
                 onClose: () => navigate('/')
             });
-        
+        } catch (error) {
+            console.error('Error creating country:', error);
+            toast.error('Failed to create country. Please try again.');
+        }
     }
 
 
-    return <div className="section">
-        <div className="container">
-            <h1 className="title">Add Country</h1>
-            <form onSubmit={handleSubmit}>
+    return (
+        <div className="section cream-background">
+            <div className="container">
+                <h1 className="title dark-text">Add Country</h1>
+                <form onSubmit={handleSubmit}>
 
-                <div className="field">
-                    <label className="label">Name</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            name={'name'}
-                            onChange={handleChange}
-                            value={formData.name}
-                        />
+                    <div className="field">
+                        <label className="label dark-text">Name</label>
+                        <div className="control">
+                            <input
+                                className="input dark-text"
+                                type="text"
+                                name="name"
+                                onChange={handleChange}
+                                value={formData.name}
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div className="field">
-                    <label className="label">Nationality</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            name={'nationality'}
-                            onChange={handleChange}
-                            value={formData.nationality}
-                        />
+                    <div className="field">
+                        <label className="label dark-text">Nationality</label>
+                        <div className="control">
+                            <input
+                                className="input dark-text"
+                                type="text"
+                                name="nationality"
+                                onChange={handleChange}
+                                value={formData.nationality}
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div className="field">
-                    <label className="label">Flag</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            name={'flag'}
-                            onChange={handleChange}
-                            value={formData.flag}
-                        />
+                    <div className="field">
+                        <label className="label dark-text">Flag</label>
+                        <div className="control">
+                            <input
+                                className="input dark-text"
+                                type="text"
+                                name="flag"
+                                onChange={handleChange}
+                                value={formData.flag}
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <button className="button">Submit</button>
-                <ToastContainer />
-            </form>
+                    <button className="button is-primary">Submit</button>
+                    <ToastContainer />
+                </form>
+            </div>
         </div>
-
-    </div>
+    );
 }

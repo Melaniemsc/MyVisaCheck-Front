@@ -1,41 +1,144 @@
+/* Body background */
+.dark-text {
+    color: #3d1e13;
+}
+
+body {
+    background-color: #e9d2c0; /* Cream background */
+    color: #3d1e13; /* Brown chocolate text color for text outside cards */
+}
+
+/* Button styles */
+.button {
+    background-color: #c1ad9d; /* Soft blue-grey */
+    border-color: #452b04; /* Matching border color */
+    color: #363636; /* Dark text color */
+    font-weight: bold; /* Enhance readability */
+}
+
+.button:hover {
+    background-color: #7a93a0; /* Darker shade on hover */
+    border-color: #7a93a0; /* Matching border color on hover */
+}
+
+/* Input styles */
+.input {
+    background-color: #f0e6d7; /* Slightly darker cream background */
+    border-color: #363636; /* Dark theme border color */
+    color: #363636; /* Dark text color */
+    border-radius: 4px; /* Adjust border radius */
+    padding: 0.5rem 0.75rem; /* Adjust padding */
+}
+
+.input:focus {
+    border-color: #209cee; /* Change border color on focus */
+    box-shadow: none; /* Remove default focus box shadow */
+}
+
+/* Card styles */
+.card {
+    background-color: #8c664e; /* Mocha background for cards */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease-in-out; /* Smooth hover transition */
+    color: #ffffff; /* White text color for text inside cards */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+}
+
+.card-content {
+    padding: 1rem; /* Padding inside cards */
+}
+
+.card-image {
+    border-radius: 8px 8px 0 0; /* Rounded corners for top of card image */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+.card-image img {
+    width: 100%; /* Full width for images inside cards */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s ease-in-out; /* Smooth transition on image hover */
+}
+
+.card-image img:hover {
+    transform: scale(1.05); /* Zoom in slightly on image hover */
+}
+
+/* Box styles */
+.box {
+    background-color: #8c664e; /* Mocha background for boxes */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: #ffffff; /* White text color for text inside boxes */
+    padding: 1rem; /* Padding inside boxes */
+    max-width: 600px;
+    margin: 1rem; 
+}
+
+/* Links */
+a {
+    color: #209cee; /* Link color */
+}
+
+a:hover {
+    color: #108db8; /* Link color on hover */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #25120b; /* Brownish almost black */
+    color: #ffffff; /* White text color */
+}
+
+.navbar-item {
+    color: inherit; /* Inherit text color */
+}
+
+.navbar-item:hover {
+    color: #ffffff; /* White text color on hover */
+}
+
+/* Dropdown styles */
 .p-dropdown {
-    /* Dropdown container */
-    border: 1px solid #363636; /* Dark theme border color */
+    border: 1px solid #452b04; /* Matching border color */
     border-radius: 8px; /* Increased border radius for a rounder look */
     box-shadow: none;
     padding: 0.5rem 0.75rem;
-    
-  }
-  
-  .p-dropdown-focused {
-    /* Dropdown container when focused */
+    background-color: #c1ad9d;
+    font-weight: bold; /* Match button background color */
+}
+
+/* Dropdown container when focused */
+.p-dropdown-focused {
     border-color: #209cee; /* Bulma's primary color */
-  }
-  
-  .p-dropdown-label, .p-dropdown-trigger {
-    /* Dropdown label and trigger */
-    color: #fff; /* White text color */
-  }
-  
-  .p-dropdown-panel {
-    /* Dropdown panel */
-    border: 1px solid #363636; /* Dark theme border color */
+}
+
+/* Dropdown label and trigger */
+.p-dropdown-label, .p-dropdown-trigger {
+    color: #363636; /* Dark text color */
+}
+
+/* Dropdown panel */
+.p-dropdown-panel {
+    border: 1px solid #452b04; /* Matching border color */
     border-top: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adjusted shadow for softer appearance */
-    background-color: #242222; /* Dark theme background color */
-    border-radius: 8px; /* Increased border radius for a rounder look */
-  }
-  
-  .p-dropdown-item {
-    /* Dropdown items */
+    background-color: #c1ad9d; /* Match button background color */
+    border-radius: 0 0 8px 8px; /* Increased border radius for a rounder look */
+}
+
+/* Dropdown items */
+.p-dropdown-item {
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid #363636; /* Dark theme border color */
-  
-    &:hover {
-      background-color: #4a4a4a; /* Dark theme hover background color */
-    }
-  }
-  
-body{
-    background-color: #E9D2C0;
+    border-bottom: 1px solid #452b04; /* Matching border color */
+    color: #363636; /* Dark text color */
+}
+
+/* Dropdown items hover */
+.p-dropdown-item:hover {
+    background-color: #7a93a0; /* Match button hover background color */
+    color: #ffffff; /* White text color on hover */
 }

@@ -103,25 +103,22 @@ const Summary = () => {
 
   function orderByCountry() {
     return (
-      <div className="buttons">
-        {visaRequiremenstCountryFrom.map(country => (
-          <div key={country.name} className="button" onClick={() => handleCountryOrder(country)}>
-            {country.name}
-          </div>
-        ))}
+      <div>
+        <div className="buttons">
+          {visaRequiremenstCountryFrom.map(country => (
+            <button key={country.name} className="button" onClick={() => handleCountryOrder(country)}>
+              {country.name}
+            </button>
+          ))}
+        </div>
         <div>
           {filteredCountryVisaRelations.map((relation, index) => (
             <div className="box" key={index}>
               <div className="columns is-vcentered">
-                <div className="column is-one-third .is-centered">
-                  <figure class="image">
-                    <img src={relation.country_from.flag} className="image is-96x96" />
+                <div className="column is-one-third has-text-centered">
+                  <figure className="image is-96x96">
+                    <img src={relation.country_to.flag} alt={`Flag of ${relation.country_to.name}`} />
                   </figure>
-                  <p className="is-size-3 ">⬇️</p>
-                  <figure class="image">
-                    <img src={relation.country_to.flag} className="image is-96x96" />
-                  </figure>
-
                 </div>
                 <div className="column">
                   <h3><strong>Country from:</strong> {relation.country_from.name}</h3>
@@ -134,9 +131,11 @@ const Summary = () => {
                   {relation.allowed_stay !== "nan" && <h3><strong>Allowed Stay:</strong> {relation.allowed_stay}</h3>}
                   {relation.notes !== "nan" && <h3><strong>Extra notes:</strong> {relation.notes}</h3>}
                 </div>
-              </div></div>
+              </div>
+            </div>
           ))}
         </div>
+
       </div>
     );
   }
@@ -161,15 +160,10 @@ const Summary = () => {
           {filteredByVisaType.map((relation, index) => (
             <div className="box" key={index}>
               <div className="columns is-vcentered ">
-                <div className="column is-one-third .is-centered">
-                  <figure class="image">
-                    <img src={relation.country_from.flag} className="image is-96x96" />
+                <div className="column is-one-third has-text-centered">
+                  <figure className="image is-96x96">
+                    <img src={relation.country_to.flag} alt={`Flag of ${relation.country_to.name}`} />
                   </figure>
-                  <p className="is-size-3 ">⬇️</p>
-                  <figure class="image">
-                    <img src={relation.country_to.flag} className="image is-96x96" />
-                  </figure>
-
                 </div>
                 <div className="column">
                   <h3><strong>Country from:</strong> {relation.country_from.name}</h3>
@@ -182,54 +176,47 @@ const Summary = () => {
                   {relation.allowed_stay !== "nan" && <h3><strong>Allowed Stay:</strong> {relation.allowed_stay}</h3>}
                   {relation.notes !== "nan" && <h3><strong>Extra notes:</strong> {relation.notes}</h3>}
                 </div>
-              </div></div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     );
   }
 
-
   return (
     <div className="hero is-fullheight-with-navbar">
       <div className="hero-body">
         <div className="container columns">
-          <div className="column is-4">
-
-            <div className="columns">
-              <div className="column">
-                <h2>These are your nationalities</h2>
-              </div>
-              <div className="column">
-                <Dropdown
-                  value={selectedAddCountry}
-                  onChange={(e) => setselectedAddCountry(e.value)}
-                  options={countries}
-                  optionLabel="name"
-                  placeholder="Select a Country"
-                  filter
-
-                />
-                <button onClick={handleAddButton}>➕</button>
-              </div>
+          <div className="column is-two-fifths">
+            <h2 className="title is-5 dark-text">These are your nationalities</h2>
+            <Dropdown
+              value={selectedAddCountry}
+              onChange={(e) => setselectedAddCountry(e.value)}
+              options={countries}
+              optionLabel="name"
+              placeholder="Select a Country"
+              filter
+              className="w-full"
+            />
+            <button onClick={handleAddButton}>➕</button>
+            <div className="box mt-3">
+              {user.nationality.map((nationality, index) => (
+                <div key={index} className="mb-2">
+                  <span>{nationality.name}</span>
+                  <button onClick={() => handleDelete(nationality)}>❌</button>
+                </div>
+              ))}
             </div>
-
-            {user.nationality.map((nationality, index) => (
-              <div key={index}>
-                {nationality.name}
-                <button className="block" onClick={() => handleDelete(nationality)}>❌</button>
-              </div>
-            ))}
           </div>
           <div className="column">
-            <h2 className="title is-5">Visa Requirements</h2>
+            <h2 className="title is-5 dark-text">Visa Requirements</h2>
             <div className="buttons">
-              <button className="button" onClick={handleOrder}>{order ? "Order by Country" : "Order by VisaType"}</button>
-              <button className="button" onClick={handleReset}>Reset</button>
+              <button className="button " onClick={handleOrder}>{order ? "Order by Country" : "Order by VisaType"}</button>
+              <button className="button " onClick={handleReset}>Reset</button>
             </div>
             <div>
-              {order && orderByCountry()}
-              {!order && orderByVisaType()}
+              {order ? orderByCountry() : orderByVisaType()}
             </div>
           </div>
         </div>

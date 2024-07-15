@@ -119,115 +119,111 @@ export default function ShowCountry() {
 
   function editCountry() {
 
-    return <div className='box'>
-
-      <form>
-
-        <div className="field">
-          <label className="label">Name</label>
-          <div className="control">
-            <input
-              className="input is-hovered"
-              type="text"
-              name={'name'}
-              onChange={handleChange}
-              value={country.name}
-            />
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">Nationality</label>
-          <div className="control">
-            <input
-              className="input is-hovered"
-              type="text"
-              name={'nationality'}
-              onChange={handleChange}
-              value={country.nationality}
-            />
-          </div>
-
+    return (
+      <div className='box'>
+        <form>
           <div className="field">
-            <label className="label">Flag</label>
+            <label className="label">Name</label>
             <div className="control">
               <input
-                className="input"
+                className="input is-hovered"
                 type="text"
-                name={'flag'}
+                name={'name'}
                 onChange={handleChange}
-                value={country.flag}
+                value={country.name}
               />
             </div>
           </div>
-        </div>
-        <div className='buttons'>
-          <button className="button" onClick={handleSubmit}>Submit</button>
-          <button onClick={() => setEditOpen(false)}>❌</button>
-        </div>
-      </form>
-    </div>
-  }
 
+          <div className="field">
+            <label className="label">Nationality</label>
+            <div className="control">
+              <input
+                className="input is-hovered"
+                type="text"
+                name={'nationality'}
+                onChange={handleChange}
+                value={country.nationality}
+              />
+            </div>
+
+            <div className="field">
+              <label className="label">Flag</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  name={'flag'}
+                  onChange={handleChange}
+                  value={country.flag}
+                />
+              </div>
+            </div>
+          </div>
+          <div className='buttons'>
+            <button className="button" onClick={handleSubmit}>Submit</button>
+            <button onClick={() => setEditOpen(false)} className='button'>❌</button>
+            
+          </div>
+        </form>
+      </div>
+    );
+  }
 
   if (!country.name) {
-    return <div className="section">
-      <ToastContainer />
-      <div className="container">
-        <div className="title">
-          Loading ...
+    return (
+      <div className="section">
+        <ToastContainer />
+        <div className="container">
+          <div className="title dark-text">Loading ...</div>
         </div>
       </div>
-    </div>
+    );
   }
-
 
   return (
     <div className="section">
       <div className="container">
         <ToastContainer />
-        <h1 className='title is-1'>{countryName}</h1>
-        <h2 className='subtitle is-3'>{country.nationality}</h2>
-
-
+        <h1 className='title is-1 dark-text'>{countryName}</h1>
+        <h2 className='subtitle is-3 dark-text'>{country.nationality}</h2>
 
         <div className='buttons'>
           <button className='button' onClick={() => handleOrder('name')}>Sort by Name {getSortIndicator('name')}</button>
           <button onClick={resetHandler} className='button'>Reset</button>
           {isAdmin() && !editOpen && <p className='button' onClick={() => setEditOpen(true)}>Edit</p>}
-
         </div>
+
         {editOpen && editCountry()}
 
         <div className="field">
           <input className='input' placeholder='Search your country here' onChange={handleInput} value={countriesFilter} />
         </div>
-        <div className="columns is-multiline is-mobile">
 
-          {sortCountries().map((country, index) => {
-            return <div className='block box column is-half-desktop is-full-tablet is-full-mobile"
-              key={country.name}>' key={index}>
+        <div className="columns is-multiline is-mobile">
+          {sortCountries().map((country, index) => (
+            <div className='block box column is-half-desktop is-full-tablet is-full-mobile' key={index}>
               <div className='columns'>
                 <div className='column is-one-quarter is-half-tablet is-half-mobile'>
                   <h3 className='subtitle is-5'>{country.country_to.name}</h3>
-                  <figure class="image">
-                    <img src={country.country_to.flag} />
+                  <figure className="image">
+                    <img src={country.country_to.flag} alt={country.country_to.name} />
                   </figure>
                 </div>
                 <div className='column'>
-                  {country.visa_type.map((visa, index) => {
-                    return <div key={index}>
+                  {country.visa_type.map((visa, index) => (
+                    <div key={index}>
                       <h3> Visa type : {visa.type}</h3>
                     </div>
-                  })}
-                  {country.allowed_stay != "nan" && <h3>Allowed Stay {country.allowed_stay}</h3>}
-                  {country.notes != "nan" && <h3>Extra notes: {country.notes}</h3>}
+                  ))}
+                  {country.allowed_stay !== "nan" && <h3>Allowed Stay {country.allowed_stay}</h3>}
+                  {country.notes !== "nan" && <h3>Extra notes: {country.notes}</h3>}
                 </div>
               </div>
             </div>
-          })}
+          ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
